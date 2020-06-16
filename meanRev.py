@@ -1,39 +1,44 @@
-import requets
+import request
 from config import *
 
-## get data from either alpaca or alpha vantage
-
-
-## mean 
-class tradingBot(symbol,time_in_froce):
+## Trading Bot
+class tradingBot(symbol,qty):
     def __init__(self):
         self.symbol = symbol
-        self.time_in_force = time_in_force
-    
-    def dataStream(self):
-
-    
-# get dataStream from alpha vantage 
+        self.qty = qty
+        self.marketClose = "1600"
+    def dataStream(self,prevClose,openPrice,weekLo,weekHi,weekAvg,monthAvg,yearAvg):
+        data = {
+            prevClose:'',
+            openPrice:'',
+            weekLo:'',
+            weekHi:'',
+            weekAvg:'',
+            monthAvg:'',
+            yearAvg:'',
+        }
+        stream = request.get(alphavantageUrl + data.json)
+        print(stream)
 ## BUY SIDE ALGO
+    if(stream.prevClose < data.yearAvg):
+        executeBuyOrder(symbol)
+    elif(data.prevClose < data.weekLo & data.monthAvg ):
+        executeBuyOrder(symbol)
+    elif(crntTime == marketClose):
+         executeSellOrder(self)
+    
+    def executeBuyOrder(self):
+        r = requests.post(self, json= data)
+        return json.loads(r.content)
 
-##get 56 week moving average,
-##get weekly moving average,
-##get daily moving average thus far
+    def executeSellOrder(self):
+        r = requests.post(self, json= data)
+        return json.loads(r.content)
+    def marketClose():
+        if(crnt time == marketclose):
+            executeSellOrder(self)
 
-# if stock is below one of the three averages execute a buy order
-##execute order
+## run the function based on your inputs
 
-
-## SELL SIDE ALGO
-
-
-def executeOrder(self):
-
-## execute order based on conditions of meanreversion
-
-
-
-## run the function based on 
-
-start = tradingBot()
+start = tradingBot('MSFT', '100')
 start.run()
